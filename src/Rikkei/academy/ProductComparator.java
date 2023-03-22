@@ -17,8 +17,10 @@ public class ProductComparator implements Comparator<Product> {
     public int compare(Product o1, Product o2) {
         switch (sortOption) {
             case 1:
+                //! Tăng dần
                 return o1.getProductPrice() - o2.getProductPrice();
             case 2:
+                //! Giảm dần
                 return o2.getProductPrice() - o1.getProductPrice();
             default:
                 return 0;
