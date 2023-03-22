@@ -17,8 +17,9 @@ public class ProductManager {
                     "3. Delete product by ID\n" +
                     "4. Show product list\n" +
                     "5. Search product by name\n" +
-                    "6. Sort product by price\n" +
-                    "7. Exit");
+                    "6. Sort product by price Up\n" +
+                    "7. Sort product by price Down\n" +
+                    "8. Exit");
             System.out.println("Please enter your choice");
             choice = Integer.parseInt(sc.nextLine());
             switch (choice) {
@@ -78,19 +79,26 @@ public class ProductManager {
                     }
                     break;
                 case 6:
-                    ArrayList<Product> sortedArr = (ArrayList<Product>) new ProductManager().sortProductByPrice();
+                    ArrayList<Product> sortedArr = (ArrayList<Product>) new ProductManager().sortProductByPriceUp();
                     System.out.println("Sort success");
                     for (int i = 0; i < sortedArr.size(); i++) {
                         System.out.println(sortedArr.get(i).toString());
                     }
                     break;
                 case 7:
+                    sortedArr = (ArrayList<Product>) new ProductManager().sortProductByPriceDown();
+                    System.out.println("Sort success");
+                    for (int i = 0; i < sortedArr.size(); i++) {
+                        System.out.println(sortedArr.get(i).toString());
+                    }
+                    break;
+                case 8:
                     System.exit(0);
                 default:
                     System.out.println("No support");
                     break;
             }
-        } while (choice != 7);
+        } while (choice != 8);
     }
 
     public int findMaxId() {
@@ -112,9 +120,18 @@ public class ProductManager {
         return null;
     }
 
-    public Object sortProductByPrice(){
+    public Object sortProductByPriceUp(){
         ProductComparator productComparator = new ProductComparator();
         Object sortedArr = arr.clone();
+        productComparator.setSortOption(1);
+        Collections.sort((ArrayList<Product>)sortedArr,productComparator);
+        return sortedArr;
+    }
+
+    public Object sortProductByPriceDown(){
+        ProductComparator productComparator = new ProductComparator();
+        Object sortedArr = arr.clone();
+        productComparator.setSortOption(2);
         Collections.sort((ArrayList<Product>)sortedArr,productComparator);
         return sortedArr;
     }
